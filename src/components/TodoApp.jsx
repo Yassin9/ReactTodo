@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import TodoSearch from 'TodoSearch';
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
+import uuid from 'node-uuid';
+
 
 class TodoApp extends React.Component {
   constructor () {
@@ -13,10 +15,10 @@ class TodoApp extends React.Component {
       showCompleted: false,
       searchText: '',
       todos: [
-        { id: 1, text: 'Walk the dog', completed: false},
-        { id: 2, text: 'Clean the yard', completed: false},
-        { id: 3, text: 'Leave mail on porch', completed: false},
-        { id: 4, text: 'Play video games', completed: true}
+        { id: uuid(), text: 'Walk the dog', completed: false},
+        { id: uuid(), text: 'Clean the yard', completed: false},
+        { id: uuid(), text: 'Leave mail on porch', completed: false},
+        { id: uuid(), text: 'Play video games', completed: true}
       ]
     };
   }
@@ -26,14 +28,14 @@ class TodoApp extends React.Component {
   }
 
   handleAddTodo(text) {
-    const todos = this.state.todos;
     const todo = {
-      id: todos.length + 1,
+      id: uuid(),
       text: text,
       completed: false
     };
-    todos.push(todo);
-    this.setState({todos});
+    this.setState({todos: [
+      ...this.state.todos, todo
+    ]});
   }
 
   render() {

@@ -29,7 +29,6 @@ class Todo extends React.Component {
 }
 
 Todo.propTypes = {
-  id: PropTypes.number,
   text: PropTypes.string,
   completed: PropTypes.bool
 };

@@ -11,14 +11,14 @@ describe('TodoApp', () => {
     expect(TodoApp).toExist();
   });
 
-  // describe('render', () => {
-  //   it('should render clock to output', () => {
-  //     const clock = ReactTestUtils.renderIntoDocument(<TodoApp totalSeconds={62}/>);
-  //     const $el = $(ReactDom.findDOMNode(clock));
-  //     const actualText = $el.find('.clock-text').text();
-  //
-  //     expect(actualText).toBe('01:02');
-  //   });
-  // });
 
+  it('should render clock to output', () => {
+    const todoText = 'test text';
+    const todoApp = ReactTestUtils.renderIntoDocument(<TodoApp/>);
+
+    todoApp.setState({todos: []});
+    todoApp.handleAddTodo(todoText);
+
+    expect(todoApp.state.todos[0].text).toBe(todoText);
+  });
 });
