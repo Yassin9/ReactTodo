@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 import Main from 'Main';
-import Example from 'Example';
 import TodoApp from 'TodoApp';
+import Example from 'Example';
 
 $(document).ready(() => $(document).foundation());
 
@@ -22,5 +22,5 @@ const App = () => {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('app')
+  document.querySelector('#app')
 );

@@ -13534,13 +13534,13 @@ var _Main = __webpack_require__(121);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _Example = __webpack_require__(120);
-
-var _Example2 = _interopRequireDefault(_Example);
-
 var _TodoApp = __webpack_require__(125);
 
 var _TodoApp2 = _interopRequireDefault(_TodoApp);
+
+var _Example = __webpack_require__(120);
+
+var _Example2 = _interopRequireDefault(_Example);
 
 __webpack_require__(263);
 
@@ -13563,7 +13563,7 @@ var App = function App() {
   );
 };
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(267)))
 
 /***/ }),
