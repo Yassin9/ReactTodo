@@ -13610,22 +13610,43 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AddTodo = function (_React$Component) {
   _inherits(AddTodo, _React$Component);
 
-  function AddTodo() {
+  function AddTodo(props) {
     _classCallCheck(this, AddTodo);
 
-    return _possibleConstructorReturn(this, (AddTodo.__proto__ || Object.getPrototypeOf(AddTodo)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (AddTodo.__proto__ || Object.getPrototypeOf(AddTodo)).call(this, props));
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
   }
 
   _createClass(AddTodo, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var text = e.target.text.value;
+
+      if (text.length > 0) {
+        this.props.onAddTodo(text);
+        e.target.text.value = '';
+      } else {
+        e.target.text.focus();
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
-          'h2',
-          null,
-          'Add todo'
+          'form',
+          { onSubmit: this.handleSubmit },
+          _react2.default.createElement('input', { type: 'text', name: 'text', placeholder: 'What do you need to do?' }),
+          _react2.default.createElement(
+            'button',
+            { className: 'button expanded' },
+            'Add Todo'
+          )
         )
       );
     }
@@ -13634,7 +13655,9 @@ var AddTodo = function (_React$Component) {
   return AddTodo;
 }(_react2.default.Component);
 
-AddTodo.propTypes = {};
+AddTodo.propTypes = {
+  onAddTodo: _propTypes2.default.func
+};
 AddTodo.defaultProps = {};
 
 exports.default = AddTodo;
@@ -13950,28 +13973,46 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Todo = function (_React$Component) {
   _inherits(Todo, _React$Component);
 
-  function Todo() {
+  function Todo(props) {
     _classCallCheck(this, Todo);
 
-    return _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
+
+    _this.state = {
+      completed: props.completed
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
   }
 
   _createClass(Todo, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState({ completed: e.target.value });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
           id = _props.id,
           text = _props.text;
+      var completed = this.state.completed;
 
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
-          'h2',
+          'div',
           null,
-          id,
-          ': ',
-          text
+          _react2.default.createElement('input', { type: 'checkbox', onChange: this.handleChange, value: completed, checked: completed }),
+          _react2.default.createElement(
+            'span',
+            null,
+            ' ',
+            id,
+            ': ',
+            text
+          )
         )
       );
     }
@@ -13982,7 +14023,8 @@ var Todo = function (_React$Component) {
 
 Todo.propTypes = {
   id: _propTypes2.default.number,
-  text: _propTypes2.default.string
+  text: _propTypes2.default.string,
+  completed: _propTypes2.default.bool
 };
 Todo.defaultProps = {};
 
@@ -14032,18 +14074,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var TodoApp = function (_React$Component) {
   _inherits(TodoApp, _React$Component);
 
-  function TodoApp(props) {
+  function TodoApp() {
     _classCallCheck(this, TodoApp);
 
-    var _this = _possibleConstructorReturn(this, (TodoApp.__proto__ || Object.getPrototypeOf(TodoApp)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (TodoApp.__proto__ || Object.getPrototypeOf(TodoApp)).call(this));
 
+    _this.handleAddTodo = _this.handleAddTodo.bind(_this);
     _this.state = {
-      todos: [{ id: 1, text: 'Walk the dog' }, { id: 2, text: 'Clean the yard' }, { id: 3, text: 'Leave mail on porch' }, { id: 4, text: 'Play video games' }]
+      todos: [{ id: 1, text: 'Walk the dog', completed: false }, { id: 2, text: 'Clean the yard', completed: false }, { id: 3, text: 'Leave mail on porch', completed: false }, { id: 4, text: 'Play video games', completed: true }]
     };
     return _this;
   }
 
   _createClass(TodoApp, [{
+    key: 'handleAddTodo',
+    value: function handleAddTodo(text) {
+      var todos = this.state.todos;
+      var todo = {
+        id: todos.length + 1,
+        text: text,
+        completed: false
+      };
+      todos.push(todo);
+      this.setState({ todos: todos });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var todos = this.state.todos;
@@ -14058,7 +14113,7 @@ var TodoApp = function (_React$Component) {
         ),
         _react2.default.createElement(_Search2.default, null),
         _react2.default.createElement(_TodoList2.default, { todos: todos }),
-        _react2.default.createElement(_AddTodo2.default, null)
+        _react2.default.createElement(_AddTodo2.default, { onAddTodo: this.handleAddTodo })
       );
     }
   }]);

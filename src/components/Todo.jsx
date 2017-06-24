@@ -2,11 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Todo extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      completed: props.completed
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ completed: e.target.value });
+  }
+
   render() {
     const {id, text} = this.props;
+    const {completed} = this.state;
     return (
       <div>
-        <h2>{id}: {text}</h2>
+        <div>
+          <input type="checkbox" onChange={this.handleChange} value={completed} checked={completed}/>
+          <span> {id}: {text}</span>
+        </div>
       </div>
     );
   }
@@ -14,7 +30,8 @@ class Todo extends React.Component {
 
 Todo.propTypes = {
   id: PropTypes.number,
-  text: PropTypes.string
+  text: PropTypes.string,
+  completed: PropTypes.bool
 };
 Todo.defaultProps = {};
 
