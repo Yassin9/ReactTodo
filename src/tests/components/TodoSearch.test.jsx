@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import expect from 'expect';
 import ReactTestUtils from 'react-dom/test-utils';
-import $ from 'jQuery';
 import TodoSearch from 'TodoSearch';
 
 describe('TodoSearch', () => {

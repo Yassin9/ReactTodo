@@ -1,12 +1,10 @@
 /* eslint-disable no-undef,react/no-find-dom-node */
 import React from 'react';
-import ReactDom from 'react-dom';
 import expect from 'expect';
 import ReactTestUtils from 'react-dom/test-utils';
-import $ from 'jQuery';
 import TodoList from 'TodoList';
+import uuid from 'node-uuid';
 import Todo from 'Todo';
-
 
 describe('TodoList', () => {
   it('should exist', () => {
@@ -15,10 +13,10 @@ describe('TodoList', () => {
 
   it('should return for each todo item one Todo Component', () => {
     const todos = [
-      { id: 1, text: 'Walk the dog'},
-      { id: 2, text: 'Clean the yard'},
-      { id: 3, text: 'Leave mail on porch'},
-      { id: 4, text: 'Play video games'}
+      { id: uuid(), text: 'Walk the dog'},
+      { id: uuid(), text: 'Clean the yard'},
+      { id: uuid(), text: 'Leave mail on porch'},
+      { id: uuid(), text: 'Play video games'}
     ];
     const todoList = ReactTestUtils.renderIntoDocument(<TodoList todos={todos}/>);
     const todosComponent = ReactTestUtils.scryRenderedComponentsWithType(todoList, Todo);
