@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './src/index.html',
+  template: './app/index.html',
   filename: path.resolve('./public/index.html'),
   inject: 'body'
 });
@@ -11,7 +11,7 @@ module.exports = {
   entry: [
     'script-loader!jquery/dist/jquery.min.js',
     'script-loader!foundation-sites/dist/js/foundation.min.js',
-    './src/App.jsx'
+    './app/App.jsx'
   ],
   externals: {
     jquery: 'jQuery'
@@ -22,7 +22,12 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   resolve: {
-    modules: [__dirname, 'node_modules', './src/components'],
+    modules: [
+      __dirname,
+      'node_modules',
+      './app/components',
+      './app/api'
+    ],
     extensions: ['.js', '.jsx', '.scss', '.css']
   },
   module: {

@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import uuid from 'node-uuid';
+import TodoAPI from 'TodoAPI';
 import TodoSearch from 'TodoSearch';
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
-import uuid from 'node-uuid';
-
 
 class TodoApp extends React.Component {
   constructor () {
@@ -15,20 +14,16 @@ class TodoApp extends React.Component {
     this.state = {
       showCompleted: false,
       searchText: '',
-      todos: [
-        { id: uuid(), text: 'Walk the dog', completed: false},
-        { id: uuid(), text: 'Clean the yard', completed: false},
-        { id: uuid(), text: 'Leave mail on porch', completed: true},
-        { id: uuid(), text: 'Play video games', completed: false}
-      ]
+      todos: TodoAPI.getTodos()
     };
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.showCompleted !== this.state.showCompleted || prevState.searchText !== this.state.searchText) {
-  //     this.setState({});
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todos !== this.state.todos) {
+      TodoAPI.setTodos(this.state.todos);
+    }
+  }
+
 
   handleToggle(id) {
     const updatedTodos = this.state.todos.map((todo) => {
