@@ -6,6 +6,7 @@ export default {
       return todos;
     }
   },
+
   getTodos() {
     const todosString = localStorage.getItem('todos');
     let todos = [];
@@ -17,5 +18,27 @@ export default {
     }
 
     return isArray(todos) ? todos : [];
+  },
+
+  filterTodos(todos, showCompleted, searchText) {
+    let filteredTodos = todos;
+
+    filteredTodos = todos.filter((todo) => {
+      return !todo.completed || showCompleted;
+    });
+
+    filteredTodos = filteredTodos.filter((todo) => {
+      if (searchText.length === 0) return true;
+      const text = todo.text.toLowerCase();
+      return text.indexOf(searchText) > -1;
+    });
+
+    filteredTodos.sort((a, b) => {
+      if (!a.completed && b.completed) return -1;
+      if (a.completed && !b.completed) return 1;
+      return 0;
+    });
+
+    return filteredTodos;
   }
 };

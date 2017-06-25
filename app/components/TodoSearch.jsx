@@ -17,11 +17,18 @@ class TodoSearch extends React.Component {
     return (
       <div>
         <div>
-          <input type="text" ref={(i) => this.searchText = i} onChange={this.handleChange} placeholder="Search Todo"/>
+          <input
+            type="text"
+            ref={(i) => this.searchText = i}
+            onChange={this.handleChange}
+            placeholder="Search Todo" autoFocus/>
         </div>
         <div>
           <label>
-            <input type="checkbox" ref={(i) => this.showCompleted = i} onChange={this.handleChange}/>
+            <input
+              type="checkbox"
+              ref={(i) => this.showCompleted = i}
+              onChange={this.handleChange}/>
             Show completed todos
           </label>
         </div>
