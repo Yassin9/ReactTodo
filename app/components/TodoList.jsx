@@ -7,12 +7,18 @@ class TodoList extends React.Component {
     super(props);
   }
   render() {
-    const todos = this.props.todos.map((todo) => {
-      return <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>;
-    });
+    const {todos} = this.props;
+    const renderTodos = () => {
+      if (todos.length === 0) return <p className="container__message">Nothing To Do</p>;
+
+      return todos.map((todo) => {
+        return <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>;
+      });
+    };
+
     return (
       <div>
-        {todos}
+        {renderTodos()}
       </div>
     );
   }

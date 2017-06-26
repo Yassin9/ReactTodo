@@ -1,4 +1,7 @@
 // Colors
-$grey: #333333;
+$grey: #333;
 $nav-text-color: white;
 $nav-background: #000;
+$light-gray: lighten($grey, 78%);
+$light-color: #aaa;
+$light-gray-border: lighten($grey, 70%);

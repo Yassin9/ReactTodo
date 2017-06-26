@@ -2,8 +2,9 @@
 import React from 'react';
 import expect from 'expect';
 import ReactTestUtils from 'react-dom/test-utils';
+import ReactDom from 'react-dom';
+import $ from 'jQuery';
 import TodoList from 'TodoList';
-import uuid from 'node-uuid';
 import Todo from 'Todo';
 
 describe('TodoList', () => {
@@ -13,15 +14,23 @@ describe('TodoList', () => {
 
   it('should return for each todo item one Todo Component', () => {
     const todos = [
-      { id: uuid(), text: 'Walk the dog'},
-      { id: uuid(), text: 'Clean the yard'},
-      { id: uuid(), text: 'Leave mail on porch'},
-      { id: uuid(), text: 'Play video games'}
+      { id: '1', text: 'Walk the dog'},
+      { id: '2', text: 'Clean the yard'},
+      { id: '3', text: 'Leave mail on porch'},
+      { id: '4', text: 'Play video games'}
     ];
     const todoList = ReactTestUtils.renderIntoDocument(<TodoList todos={todos}/>);
     const todosComponent = ReactTestUtils.scryRenderedComponentsWithType(todoList, Todo);
 
     expect(todosComponent.length).toBe(todos.length);
+  });
+
+  it('should return empty message if no todos', () => {
+    const todos = [];
+    const todoList = ReactTestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    const $el = $(ReactDom.findDOMNode(todoList));
+
+    expect($el.find('.container__message').length).toBe(1);
   });
 
 });
