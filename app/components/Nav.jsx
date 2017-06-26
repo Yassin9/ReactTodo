@@ -7,15 +7,15 @@ class Nav extends React.Component {
       <div>
         <div className="title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
           <button className="menu-icon" type="button" data-toggle="top-menu"></button>
-          <div className="title-bar-title">React Timer</div>
+          <div className="title-bar-title">Menu</div>
         </div>
 
-        <div className="top-bar top-bar-links" id="top-menu">
+        <div className="top-bar" id="top-menu">
           <div className="top-bar-left">
             <ul className="menu">
-              <li className="menu-text"><a href="/">Todo App</a></li>
+              <li className="menu-text">Todo App</li>
               <li><IndexLink to="/" activeClassName="active">Todo</IndexLink></li>
-              <li><Link to="/example" activeClassName="active">Example</Link></li>
+              <li><Link to="/about" activeClassName="active">About</Link></li>
             </ul>
           </div>
           <div className="top-bar-right">

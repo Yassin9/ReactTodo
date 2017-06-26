@@ -12,9 +12,9 @@ class Todo extends React.Component {
       let message = 'Created';
       if (completed) {
         timestamp = completedAt;
-        message = 'Updated';
+        message = 'Completed on';
       }
-      return `${message} ${moment.unix(timestamp).fromNow()}`;
+      return `${message} ${moment.unix(timestamp).format('MMM Do Y @ h:mm A')}`;
     };
 
     return (
